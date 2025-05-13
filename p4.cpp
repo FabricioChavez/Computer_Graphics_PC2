@@ -155,7 +155,18 @@ bool line_segment_insertection(T px , T py , // punto de paso de recta
      T ax , T ay , T bx , T by){ // segmento 
      T zero = static_cast<T>(0);
 
-    Vector<T> P(px , py , zero );
+    Vector<T> P(px , py , zero ); //punto de paso en recta
+    Vector<T> Dir(dirx , diry , z);
+    Vector<T> PA(ax , ay , zero);
+    Vector<T> PB(bx , by , zero);
+
+    Vector<T> dirP_to_PA = PA-P;
+    Vector<T> dirP_to_PB = Pb-P;
+
+    
+
+
+
         
 
 
