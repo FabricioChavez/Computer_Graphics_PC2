@@ -107,37 +107,37 @@ bool my_xor(bool a , bool b){
 
 
 
-template <typename T>
-bool insise_triangle(vector<vector<T>> const& vertices, T px, T py){
-T zero = static_cast<T>(0);
-    Vector<T> p0(vertices[0][0] , vertices[0][1],zero);
-    Vector<T> p1(vertices[1][0] , vertices[1][1],zero);
-    Vector<T> p2(vertices[2][0] , vertices[2][1],zero);
-    Vector<T> p(px , py , zero);
-
-    Vector<T> a0 = p-p0;
-    Vector<T> a1 = p-p1;
-    Vector<T> a2 = p-p2;
-
-
-
-   int sgn1 = sgn(a1.cross_product(a0));
-   int sgn2 = sgn(a2.cross_product(a1));
-   int sgn3 = sgn(a0.cross_product(a2));
-
-
-   if(sgn1==0 and sgn2 == 0  and sgn3 == 0) return false; //triangulo degenerado
-
-   if( sgn1 == sgn2 and sgn2 == sgn3 ) return true;
-   //estan en el segmento o edge del triangulo es decir el punto p colineal a un edge
-   else if(sgn1==zero and sgn2 == sgn3 ) return true;
-   else if(sgn2==zero and sgn1 == sgn3 ) return true;
-   else if(sgn3==zero and sgn1 == sgn2 ) return true;
-
-   return false;
-
+template <typename T> 
+bool inside_triangle(vector<vector<T>> const& vertices, T px, T py) {
+    T zero = static_cast<T>(0);
+    Vector<T> p0(vertices[0][0], vertices[0][1], zero);
+    Vector<T> p1(vertices[1][0], vertices[1][1], zero);
+    Vector<T> p2(vertices[2][0], vertices[2][1], zero);
+    Vector<T> p(px, py, zero);
+    
+   
+    Vector<T> a0 = p0 - p; 
+    Vector<T> a1 = p1 - p; 
+    Vector<T> a2 = p2 - p; 
+    
+   
+    T cp1 = a0.cross_product(a1);
+    T cp2 = a1.cross_product(a2);
+     cp3 = a2.cross_product(a0);
+    
+    int sgn1 = sgn(cp1.z_); 
+    int sgn2 = sgn(cp2.z_);
+    int sgn3 = sgn(cp3.z_);
+    
+ 
+    if (sgn1 == 0 && sgn2 == 0 && sgn3 == 0) return false;
+    
+  
+    bool inside = (sgn1 >= 0 && sgn2 >= 0 && sgn3 >= 0) || 
+                  (sgn1 <= 0 && sgn2 <= 0 && sgn3 <= 0);
+                  
+    return inside;
 }
-
 
 
 int main(int argc, char** argv) {
