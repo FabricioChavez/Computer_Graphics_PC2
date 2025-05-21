@@ -123,7 +123,7 @@ bool inside_triangle(vector<vector<T>> const& vertices, T px, T py) {
    
     T cp1 = a0.cross_product(a1);
     T cp2 = a1.cross_product(a2);
-     cp3 = a2.cross_product(a0);
+    T  cp3 = a2.cross_product(a0);
     
     int sgn1 = sgn(cp1.z_); 
     int sgn2 = sgn(cp2.z_);
