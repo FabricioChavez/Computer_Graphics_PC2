@@ -263,7 +263,7 @@ return with_points_removed;
 
 
 template<typename T>
-pair<Vector<T>, int> min_y(vector<vector<T>> v){
+Vector<T> min_y(vector<vector<T>> v){
 
     T y_min =  v[0][1];
     int idx = -1;
@@ -279,7 +279,7 @@ pair<Vector<T>, int> min_y(vector<vector<T>> v){
     
     T zero = static_cast<T>(0);
     
-    return make_pair(Vector<T>(v[idx][0], vp[idx][1] ,zero),idx);
+    return Vector<T>(v[idx][0], vp[idx][1] ,zero);
 }
 
 
@@ -296,22 +296,20 @@ vector<vector<T>> jarvis(vector<vector<T>> const& vertices,
     T zero = static_cast<T> (0);
  
     vector<Vector<T>> ans;
+    vector<vector<T>> ans_t;
 
     Vector<T> pivot_y ;
 
-    auto pivot_idx = min_y(to_work_with);
-    pivot_y = pivot_y.first;
-    int idx = pivot.second;    
+    auto pivot_y = min_y(to_work_with);
+   
 
-    unordered_set<int> used_idx;
-    used_idx.insert(idx);     
-    ans.push_back(pivot_y);
-    
-
-
+   
     to_work_with.push_back(to_work_with[0]);
 
     Vector<T> current_most_counter_clock =  Vector<T>(to_work_with[0][0], to_work_with[0][1], zero ) - pivot_y ;
+    ans.push_back(pivot_y);
+    ans_t.push_back(vector<T>{pivot_y.x_,pivot_y.y_});
+    
     
     int n = to_work_with.size();
     for (int i = 0; i < n; i++)
@@ -323,9 +321,17 @@ vector<vector<T>> jarvis(vector<vector<T>> const& vertices,
        
         for (int j = 0; j < n; j++)
         {   Vector<T> candidate_min = Vector<T>(to_work_with[j][0], to_work_with[j][1] , zero)-Vector<T>(*(ans.back())[0], *(ans.back())[1] , zero);
-            if(used_idx.find(j)==used_idx.end(); and sgn<T>(current_most_counter_clock.cross_product(candidate_min))<0){
+            int sign = sgn<T>(current_most_counter_clock.cross_product(candidate_min));
+
+            if(sign==0){
+                current_most_counter_clock= (candidate_min.norm()>current_most_counter_clock.norm)?candidate_min:current_most_counter_clock;
+                idx_temp = j;                
+            }else if(sign < 0){
                 current_most_counter_clock = candidate_min;
+                idx_temp = j;
             }
+
+           
         }
 
         ans.push_back(current_most_counter_clock);
