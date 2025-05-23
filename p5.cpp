@@ -28,11 +28,11 @@ public:
         } else is_int = false;
     }
 
-    // Constructor para long long
+   
     Vector(ll x, ll y, ll z) {
         if (is_same<int, T>::value) {
             is_int = true;
-            // Convertir los valores long long a T de manera segura
+     
             x_ = (x > INT_MAX) ? INT_MAX : ((x < INT_MIN) ? INT_MIN : static_cast<T>(x));
             y_ = (y > INT_MAX) ? INT_MAX : ((y < INT_MIN) ? INT_MIN : static_cast<T>(y));
             z_ = (z > INT_MAX) ? INT_MAX : ((z < INT_MIN) ? INT_MIN : static_cast<T>(z));
@@ -44,11 +44,11 @@ public:
         }
     }
 
-    // Constructor para long double
+
     Vector(ld x, ld y, ld z) {
         if (is_same<int, T>::value) {
             is_int = true;
-            // Para int, verificamos los límites
+            
             x_ = (x > INT_MAX) ? INT_MAX : ((x < INT_MIN) ? INT_MIN : static_cast<T>(x));
             y_ = (y > INT_MAX) ? INT_MAX : ((y < INT_MIN) ? INT_MIN : static_cast<T>(y));
             z_ = (z > INT_MAX) ? INT_MAX : ((z < INT_MIN) ? INT_MIN : static_cast<T>(z));
