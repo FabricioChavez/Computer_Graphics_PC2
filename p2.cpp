@@ -101,7 +101,7 @@ class Vector{
 bool my_xor(bool a , bool b){
     return a!=b;
 }
-//problema 1
+
 template <typename T>
 bool intersection(T x1 , T y1 , T x2 , T y2 , T x3 , T y3  , T x4 , T y4 ) { // P1
 
@@ -131,9 +131,13 @@ bool intersection(T x1 , T y1 , T x2 , T y2 , T x3 , T y3  , T x4 , T y4 ) { // 
     
 
     bool der_v12_v13 = v12.cross_product(v13).z_ >= zero;
-    bool der_v12_v14 = v13.cross_product(v14).z_ >= zero;
+    bool der_v12_v14 = v12.cross_product(v14).z_ >= zero;
     bool different_dir = my_xor(der_v12_v13 , der_v12_v14);
 
+    int sgn1 = sgn<T>(v12.cross_product(v13).z_);
+    int sgn2 =sgn<T>(v13.cross_product(v14).z_);
+
+    if(sgn1 ==0 and sgn2 == 0) return true;
 
 
     Vector<T>v31 = Vector(x1-x3,y1-y3,zero);
