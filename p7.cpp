@@ -137,6 +137,9 @@ bool my_xor(bool a, bool b) {
 template <typename T>
 bool intersection(T x1 , T y1 , T x2 , T y2 , T x3 , T y3  , T x4 , T y4 ) { // P1
 
+    if ((x1 == x3 and y1 == y3) or (x1 == x4 and y1 == y4) or (x2 == x3 and y2 == y3) or (x2 == x4 and y2 == y4))
+    return true;
+
     T lowerx1 = min(x1,x2);
     T lowerx2 = min(x3,x4);
     T upperx1 = max(x1,x2);
@@ -190,7 +193,7 @@ public:
     Vector<T> init_;
     Vector<T> fin_;
     int id_;  
-    static T current_x; 
+    static T current_x;  
 
     Segment() : init_(Vector<T>(0, 0, 0)), fin_(Vector<T>(0, 0, 0)), id_(-1) {}
 
@@ -212,7 +215,7 @@ public:
         T y1 = this->get_y_at(current_x);
         T y2 = other.get_y_at(current_x);
         if (y1 != y2) return y1 < y2;
-        return id_ < other.id_;
+        return id_ < other.id_; 
     }
 
     bool intersects_with(const Segment<T>& other) const {

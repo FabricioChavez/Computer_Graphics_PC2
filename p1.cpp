@@ -105,6 +105,9 @@ bool my_xor(bool a , bool b){
 template <typename T>
 bool intersection(T x1 , T y1 , T x2 , T y2 , T x3 , T y3  , T x4 , T y4 ) { // P1
 
+    if ((x1 == x3 and y1 == y3) or (x1 == x4 and y1 == y4) or (x2 == x3 and y2 == y3) or (x2 == x4 and y2 == y4))
+    return true;
+
     T lowerx1 = min(x1,x2);
     T lowerx2 = min(x3,x4);
     T upperx1 = max(x1,x2);
